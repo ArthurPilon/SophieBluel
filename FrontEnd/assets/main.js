@@ -22,3 +22,30 @@ async function loadGalleryData() {
     imgGalleryDiv.appendChild(figureElem);
   });
 }
+
+function loadFilters() {
+  fetch(apiURL + "categories")
+    .then((response) => response.json())
+    .then((data) => {
+      const filters = document.querySelector(".filterslist");
+      filters.innerHTML = "";
+      data.forEach((filter) => {
+        const filterDiv = document.createElement("div");
+        filterDiv.classList.add("filter");
+
+        const filterLi = document.createElement("button");
+        filterLi.textContent = filter.name;
+
+        filterDiv.appendChild(filterLi);
+        filters.appendChild(filterDiv);
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching projects", error);
+    });
+}
+
+window.onload = () => {
+  loadFilters();
+  loadGalleryData();
+};
