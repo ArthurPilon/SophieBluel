@@ -52,7 +52,7 @@ window.onload = async () => {
   let filtreObjets = document.querySelectorAll(".filterslist button");
   let imgGalleryDiv = document.getElementById("img-gallery");
   let figures = imgGalleryDiv.getElementsByTagName("figure");
-  let buttonTous = getElementById("#buttontous");
+  let buttonTous = document.getElementById("butontous");
 
   filtreObjets.forEach((btn) => {
     console.log(7, btn);
@@ -72,16 +72,17 @@ window.onload = async () => {
           figure.style.display = "none";
         }
       });
-      /* buttonTous(tous) => {
-        tous.addEventListener("click", () => {
-          filtreObjets.forEach((btn) => {
-            btn.classList.remove("active");
-          });
-          Array.from(figures).forEach(figure)
-          figure.style.display = "block"
-        }) 
-      }*/
     });
   });
-  console.log(6, filtreObjets);
+
+  buttonTous.addEventListener("click", () => {
+    filtreObjets.forEach((btn) => {
+      btn.classList.remove("active");
+    });
+    buttonTous.classList.add("active");
+
+    Array.from(figures).forEach((figure) => {
+      figure.style.display = "block";
+    });
+  });
 };

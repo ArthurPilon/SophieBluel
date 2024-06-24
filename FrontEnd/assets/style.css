@@ -164,6 +164,18 @@ h2 {
   font-size: 30px;
   color: #1d6154;
 }
+
+header a {
+  text-decoration: none;
+}
+
+header a:link,
+a:visited,
+a:hover,
+a:active {
+  color: inherit; /* ou spécifiez une couleur, par exemple, color: black; */
+}
+
 nav ul {
   display: flex;
   align-items: center;
@@ -290,4 +302,12 @@ footer nav ul {
   display: flex;
   justify-content: flex-end;
   margin: 2em;
+}
+
+/* Page login*/
+
+#login {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
