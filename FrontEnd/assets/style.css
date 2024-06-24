@@ -210,17 +210,21 @@ li:hover {
   margin-bottom: 40px;
 }
 
+/* les boutons ne sont pas inscrit comme des boutons mais comme des inputs */
+
 .filterslist button {
   background-color: white;
-  padding: 10px;
+  padding: 10px 13px;
   border-radius: 30px;
   font-family: "Syne";
   color: #1d6154;
-  font-size: 18px;
+  font-size: 16px;
   border-color: #1d6154;
+  cursor: pointer;
+  border-width: 1px;
 }
 
-.filterslist button .active {
+.filterslist .active {
   background-color: #1d6154;
   color: white;
 }
