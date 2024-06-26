@@ -287,6 +287,12 @@ li:hover {
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+footer nav li {
+  font-size: 1em;
+  font-size: smaller;
+  font-weight: 100;
+}
+
 input[type="submit"] {
   font-family: "Syne";
   font-weight: 700;
@@ -307,7 +313,43 @@ footer nav ul {
 /* Page login*/
 
 #login {
+  width: 35%;
+  margin: 150px auto 400px auto;
+}
+
+#login > * {
+  text-align: center;
+}
+
+#navlogin {
+  font-weight: bold;
+}
+#login h2 {
+  margin-bottom: 20px;
+  align-self: center;
+}
+#login form {
+  text-align: left;
+  margin-top: 30px;
   display: flex;
-  align-items: center;
   flex-direction: column;
+}
+
+#login input {
+  height: 50px;
+  font-size: 1.2em;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login .input {
+  display: flex;
+  flex-direction: column;
+}
+#login label {
+  margin: 2em 0 1em 0;
+  align-self: start;
+}
+#login textarea {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
