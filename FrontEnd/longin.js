@@ -1,5 +1,4 @@
 const loginForm = document.getElementById("loginform");
-const loginButton = document.getElementById("login-form-submit");
 const apiURL = "http://localhost:5678/api/";
 
 loginForm.addEventListener("submit", (e) => {
@@ -13,10 +12,10 @@ loginForm.addEventListener("submit", (e) => {
   });
   console.log(11, formObject);
 
-  async function postJSON(data) {
+  async function postJSON() {
     try {
-      const response = await fetch("http://localhost:5678/api/users/login", {
-        method: "POST", // or 'PUT'
+      const response = await fetch(apiURL + "users/login", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -25,16 +24,25 @@ loginForm.addEventListener("submit", (e) => {
 
       const result = await response.json();
       console.log("Success:", result);
+
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("userId", result.userId);
+      const storedToken = localStorage.getItem("token");
+      const storedUserId = localStorage.getItem("userId");
+
+      console.log("Stored Token:", storedToken);
+      console.log("Stored UserId:", storedUserId);
+
+      if (result.token) {
+        window.location.href = "/index.html";
+      } else {
+        alert("Erreur dans l’identifiant ou le mot de passe");
+        //response.status != 200;
+      }
     } catch (error) {
       console.error("Error:", error);
     }
   }
 
-  const data = { username: "example" };
-  postJSON(data);
+  postJSON();
 });
-
-// recup email password du form
-// envoi à l'API http://localhost:5678/api/users/login
-// aide:https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#body
-// localsotrage du token (mdn localstorage pour la recherche)

@@ -1,9 +1,20 @@
 const apiURL = "http://localhost:5678/api/";
+const storedToken = localStorage.getItem("token");
+let works = null;
+//localStorage.clear();
+
+console.log(18, document.body.classList);
+
+if (storedToken) {
+  document.body.classList.add("log");
+} else {
+  document.body.classList.remove("log");
+}
 
 async function loadGalleryData() {
   let data = await fetch(apiURL + "works");
   console.log(1, data);
-  const works = await data.json();
+  works = await data.json();
   let imgGalleryDiv = document.getElementById("img-gallery");
   console.log(2, works, imgGalleryDiv);
 
@@ -38,6 +49,7 @@ async function loadFilters() {
     const buttonElem = document.createElement("button");
     buttonElem.textContent = filter.name;
     buttonElem.setAttribute("id", "filter" + filter.id);
+    buttonElem.classList.add("hidden_if_logged");
     buttonElem.dataset.categoryId = filter.id;
 
     filtersDiv.appendChild(liElem);
@@ -84,5 +96,11 @@ window.onload = async () => {
     Array.from(figures).forEach((figure) => {
       figure.style.display = "block";
     });
+  });
+
+  let logoutbutton = document.getElementById("logoutbutton");
+  logoutbutton.addEventListener("click", () => {
+    localStorage.clear();
+    location.reload();
   });
 };
