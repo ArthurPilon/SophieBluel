@@ -1,7 +1,7 @@
 const apiURL = "http://localhost:5678/api/";
 const storedToken = localStorage.getItem("token");
 let works = null;
-//localStorage.clear();
+let modal = null;
 
 console.log(18, document.body.classList);
 
@@ -104,3 +104,68 @@ window.onload = async () => {
     location.reload();
   });
 };
+
+const openModal = function (e) {
+  e.preventDefault();
+  const target = document.querySelector(e.target.getAttribute("href"));
+  target.style.display = null;
+  modal = target;
+  modal.addEventListener("click", closeModal);
+  modal.querySelector(".js-modal-close").addEventListener("click", closeModal);
+  modal
+    .querySelector(".js-modal-stop")
+    .addEventListener("click", stopPropagation);
+
+  loadModalGallery(works);
+};
+
+const closeModal = function (e) {
+  if (modal === null) return;
+  e.preventDefault();
+  modal.style.display = "none";
+  modal.removeEventListener("click", closeModal);
+  modal
+    .querySelector(".js-modal-close")
+    .removeEventListener("click", closeModal);
+  modal
+    .querySelector(".js-modal-stop")
+    .removeEventListener("click", stopPropagation);
+
+  modal = null;
+};
+
+const stopPropagation = function (e) {
+  e.stopPropagation();
+};
+
+async function loadModalGallery(items) {
+  const modalGalleryDiv = document.querySelector(".modal-gallery");
+  modalGalleryDiv.innerHTML = "";
+
+  items.forEach((item) => {
+    const figureElem = document.createElement("figure");
+    const imgElem = document.createElement("img");
+    const trashIcon = document.createElement("i");
+
+    imgElem.src = item.imageUrl;
+    imgElem.alt = item.title;
+
+    trashIcon.classList.add("fa-solid", "fa-trash-can", "trashicon");
+    trashIcon.style.color = "#ffffff";
+    trashIcon.style.position = "absolute";
+    trashIcon.style.top = "5px"; // Adjust as needed
+    trashIcon.style.right = "5px"; // Adjust as needed
+    trashIcon.style.cursor = "pointer";
+    // trashIcon.style.background = "#000";
+
+    figureElem.style.position = "relative"; // Ensure the icon is positioned relative to the figure
+    figureElem.appendChild(imgElem);
+    figureElem.appendChild(trashIcon);
+
+    modalGalleryDiv.appendChild(figureElem);
+  });
+}
+
+document.querySelectorAll(".js-modal").forEach((a) => {
+  a.addEventListener("click", openModal);
+});
