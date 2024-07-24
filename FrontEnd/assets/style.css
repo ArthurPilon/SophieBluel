@@ -193,6 +193,11 @@ header {
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  top: 0;
+  gap: 10px;
 }
 
 .log .hidden_if_logged {
@@ -251,7 +256,7 @@ header a:link,
 a:visited,
 a:hover,
 a:active {
-  color: inherit; /* ou spécifiez une couleur, par exemple, color: black; */
+  color: inherit;
 }
 
 nav ul {
@@ -406,6 +411,17 @@ footer nav ul {
   margin: 2em;
 }
 
+.js-modal a {
+  text-decoration: none;
+}
+
+.js-modal a:link,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
 .modal {
   display: flex;
   align-items: center;
@@ -421,6 +437,7 @@ footer nav ul {
 .modal1-wrapper {
   display: flex;
   flex-direction: column;
+  /*position: relative; */
   background-color: #fff;
   width: 630px;
   height: 688px;
@@ -428,8 +445,54 @@ footer nav ul {
   padding: 30px;
 }
 
-.modal1-wrapper button {
-  align-self: flex-end;
+#modal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.modal1 {
+  display: block;
+}
+
+.modal2 {
+  display: none;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+#modal-returnbutton {
+  border: none;
+  background-color: white;
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+.modal-form-category-go {
+  background-color: #1d6154;
+  color: white;
+  padding: 10px 13px;
+  border-radius: 30px;
+  font-family: "Syne";
+  font-size: 16px;
+  border-color: grey;
+  cursor: pointer;
+  border-width: 1px;
+  width: 60%;
+  margin-top: auto;
+  align-self: center;
+}
+
+#modal-close-button {
+  border: none;
+  background-color: white;
+  align-self: flex-start;
+  cursor: pointer;
 }
 
 .modal1-wrapper h3 {
@@ -441,17 +504,16 @@ footer nav ul {
 .modal-gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 2%; /* Ajustez cet écart selon vos besoins */
+  gap: 2%;
   row-gap: 30px;
-  justify-content: space-between;
+
   padding-left: 13%;
   padding-right: 13%;
-  height: 60%;
   overflow-y: auto;
 }
 
 .modal-gallery figure {
-  flex: 0 0 calc(20% - 2%); /* 20% de la largeur moins l'écart */
+  flex: 0 0 calc(20% - 2%);
   box-sizing: border-box;
   height: fit-content;
 }
@@ -464,19 +526,89 @@ footer nav ul {
 .modal-gallery figure .trashicon {
   background-color: black;
   padding: 5px;
+  color: #fff;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  font-size: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-add-picture {
+  padding-left: 13%;
+  padding-right: 13%;
+  height: 100%;
+}
+
+#modal-container-add-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e8f0f6;
+  height: 45%;
+  justify-content: center;
+}
+
+#modal-container-add-pic button {
+  border-radius: 30px;
+  width: 45%;
+  height: 45px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #cbd7dc;
+  cursor: pointer;
+  position: relative;
+}
+
+#modal-container-add-pic i {
+  font-size: 76px;
+}
+
+#modal-container-add-pic button p {
+  z-index: 0;
+  position: relative;
+}
+
+#modal-container-add-pic input {
+  z-index: 1;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+#modal-container-add-pic button p {
+  font-size: 17px;
+  color: #29759e;
+}
+
+#modal-container-add-pic img {
+  height: 100%;
+  width: 33%;
 }
 
 #modal-bottom {
   margin-top: auto;
   padding-top: 40px;
+  padding-bottom: 15px;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #b3b3b3;
+  border-top: 1px solid #326986;
   margin-left: 13%;
   margin-right: 13%;
 }
 
-#modal-sendbutton {
+.modal-sendbutton {
   align-self: center;
   background-color: #1d6154;
   color: white;
@@ -489,6 +621,62 @@ footer nav ul {
   border-width: 1px;
   width: 60%;
   margin-top: auto;
+}
+
+.modal-sendbutton {
+  background-color: grey;
+  color: white;
+  padding: 10px 13px;
+  border-radius: 30px;
+  font-family: "Syne";
+  font-size: 16px;
+  border-color: #1d6154;
+  cursor: pointer;
+  border-width: 1px;
+  width: 60%;
+  margin-top: auto;
+}
+
+#buttontomodal2 {
+  display: flex;
+  justify-content: center;
+  background-color: #1d6154;
+  color: white;
+  padding: 10px 13px;
+  border-radius: 30px;
+  font-family: "Syne";
+  font-size: 16px;
+  border-color: #1d6154;
+  cursor: pointer;
+  border-width: 1px;
+  width: 60%;
+  margin-top: auto;
+}
+
+#modal-form {
+  display: flex;
+  flex-direction: column;
+  height: 46%;
+  justify-content: space-around;
+}
+
+#modal-form input {
+  height: 50px;
+  border: 0px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: work sans;
+  font-size: 15px;
+  padding-left: 15px;
+}
+#modal-form select {
+  height: 50px;
+  width: 100%;
+  border: 0px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  appearance: none;
+  font-family: work sans;
+  font-size: 15px;
+  padding-left: 15px;
 }
 
 /* Page login*/
