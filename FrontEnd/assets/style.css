@@ -194,10 +194,11 @@ header {
   align-items: center;
   margin-bottom: 30px;
   width: 100vw;
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   top: 0;
   gap: 10px;
+  /* à finir prend le pas sur le reste */
 }
 
 .log .hidden_if_logged {
@@ -264,6 +265,8 @@ nav ul {
   align-items: center;
   list-style-type: none;
   gap: 30px;
+  cursor: pointer;
+  /* à refaire  */
 }
 
 .logonav span {
@@ -681,6 +684,14 @@ a:active {
 
 /* Page login*/
 
+#maincontentlogin {
+  max-width: 1140px;
+  margin: auto;
+  font-family: "Work Sans";
+  font-size: 14px;
+  margin: 35px 54px 0 54px;
+}
+
 #login {
   width: 35%;
   margin: 150px auto 400px auto;
@@ -690,9 +701,23 @@ a:active {
   text-align: center;
 }
 
+#logo-login span {
+  margin-top: 5px;
+}
+
+#loginheader {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 #navlogin {
   font-weight: bold;
 }
+
+#login-insta {
+  width: 50%;
+}
+
 #login h2 {
   margin-bottom: 20px;
   align-self: center;

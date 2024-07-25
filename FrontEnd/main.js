@@ -171,7 +171,9 @@ async function loadModalGallery() {
 
 function addDeleteWorkListener(button, id, figureElem) {
   button.addEventListener("click", function () {
-    deleteWork(id);
+    if (confirm("Voulez-vous vraiment supprimer cette image ?") == true) {
+      deleteWork(id);
+    }
   });
 }
 const deleteWork = async function (id, figureElem) {
@@ -221,9 +223,12 @@ document
     document.querySelectorAll(".modal1").forEach(function (element) {
       element.style.display = "flex";
     });
+    loadGalleryData();
+    loadModalGallery();
   });
 
 // ajouter photo
+
 document
   .getElementById("modal-fileinput")
   .addEventListener("change", function (event) {
@@ -254,6 +259,7 @@ const sendButton = document.getElementById("modal-sendbutton2");
 let categorySelect = undefined;
 
 //création du select
+
 async function CreateModalFilters() {
   let modalSelect = document.getElementById("modal-select");
   modalSelect.innerHTML = "";
@@ -283,6 +289,8 @@ async function CreateModalFilters() {
   modalSelect.appendChild(selectElem);
 }
 
+let sendButtonEnable = false;
+
 // vérifier si tous les champs sont remplis
 function checkFormValidity() {
   const file = fileInput.files[0];
@@ -304,17 +312,28 @@ function checkFormValidity() {
     sendButton.classList.remove("modal-sendbutton");
     sendButton.classList.add("modal-form-category-go");
     console.log("Button class:", sendButton.className);
+    sendButtonEnable = true;
   } else {
     sendButton.disabled = true;
     sendButton.classList.remove("modal-form-category-go");
     console.log("Button class:", sendButton.className);
+    sendButtonEnable = false;
   }
 }
 
 fileInput.addEventListener("change", checkFormValidity);
 titleInput.addEventListener("input", checkFormValidity);
 
+// Stocker le contenu initial de la section photo
+const initialPhotoSectionContent = document.getElementById(
+  "modal-container-add-pic"
+).innerHTML;
+
 sendButton.addEventListener("click", function (event) {
+  if (!sendButtonEnable) {
+    alert("Veuillez remplir tous les champs");
+    return;
+  }
   console.log("Bouton envoyer cliqué");
 
   const file = fileInput.files[0];
@@ -341,12 +360,45 @@ sendButton.addEventListener("click", function (event) {
     .then((response) => response.json())
     .then((data) => {
       console.log("Réponse de l'API:", data);
+      loadGalleryData();
+      loadModalGallery();
+
+      // Réinitialiser le formulaire
+      fileInput.value = "";
+      titleInput.value = "";
+      categorySelect.value = "";
+
+      // Restaurer le contenu initial de la section photo
+      const preview = document.getElementById("modal-container-add-pic");
+      preview.innerHTML = initialPhotoSectionContent;
+
+      // Réattacher l'événement de changement pour permettre le réupload d'une photo
+      document
+        .getElementById("modal-fileinput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          const preview = document.getElementById("modal-container-add-pic");
+          preview.innerHTML = "";
+
+          if (file) {
+            const validImageTypes = ["image/jpeg", "image/png"];
+            if (!validImageTypes.includes(file.type)) {
+              alert("Erreur : le fichier doit être une image (jpg, png)");
+              return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const img = document.createElement("img");
+              img.src = e.target.result;
+              preview.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+          }
+          checkFormValidity();
+        });
     })
     .catch((error) => {
       console.error("Erreur lors de l'envoi des données à l'API:", error);
     });
 });
-// Essayer de réccupérer les infos du form, les convertir en JSON, les transmettre
-
-//On ne devrait pas avoir besoin de recharger la page pour voir que le projet a été supprimé. Assurez-vous donc de répondre à la question suivante :
-//Comment retirer des éléments du DOM après avoir reçu la confirmation de la suppression de l’entrée en base de données ?
