@@ -166,7 +166,7 @@ header {
 }
 
 .log .logonav {
-  margin: 0 100px;
+  margin: 70px 100px;
   width: 85%;
 }
 
@@ -194,11 +194,10 @@ header {
   align-items: center;
   margin-bottom: 30px;
   width: 100vw;
-  /* position: fixed; */
+  position: fixed;
   left: 0;
   top: 0;
   gap: 10px;
-  /* à finir prend le pas sur le reste */
 }
 
 .log .hidden_if_logged {
@@ -266,7 +265,6 @@ nav ul {
   list-style-type: none;
   gap: 30px;
   cursor: pointer;
-  /* à refaire  */
 }
 
 .logonav span {
@@ -440,7 +438,6 @@ a:active {
 .modal1-wrapper {
   display: flex;
   flex-direction: column;
-  /*position: relative; */
   background-color: #fff;
   width: 630px;
   height: 688px;

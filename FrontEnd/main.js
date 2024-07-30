@@ -308,21 +308,18 @@ function checkFormValidity() {
     category !== undefined &&
     category !== ""
   ) {
-    sendButton.disabled = false;
+    // sendButton.disabled = false;
     sendButton.classList.remove("modal-sendbutton");
     sendButton.classList.add("modal-form-category-go");
     console.log("Button class:", sendButton.className);
     sendButtonEnable = true;
   } else {
-    sendButton.disabled = true;
+    // sendButton.disabled = true;
     sendButton.classList.remove("modal-form-category-go");
     console.log("Button class:", sendButton.className);
     sendButtonEnable = false;
   }
 }
-
-fileInput.addEventListener("change", checkFormValidity);
-titleInput.addEventListener("input", checkFormValidity);
 
 // Stocker le contenu initial de la section photo
 const initialPhotoSectionContent = document.getElementById(
@@ -367,6 +364,8 @@ sendButton.addEventListener("click", function (event) {
       fileInput.value = "";
       titleInput.value = "";
       categorySelect.value = "";
+      checkFormValidity();
+      sendButton.classList.add("modal-sendbutton");
 
       // Restaurer le contenu initial de la section photo
       const preview = document.getElementById("modal-container-add-pic");
@@ -401,4 +400,7 @@ sendButton.addEventListener("click", function (event) {
     .catch((error) => {
       console.error("Erreur lors de l'envoi des données à l'API:", error);
     });
+  fileInput.addEventListener("change", checkFormValidity);
+  titleInput.addEventListener("input", checkFormValidity);
+  categorySelect.addEventListener("change", checkFormValidity);
 });

@@ -2,160 +2,174 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <title>Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sophie Bluel, Architecte d'intérieur. Découvrez mes projets et contactez-moi pour vos besoins en design d'espace."
+    />
+    <title>Sophie Bluel - Architecte d'intérieur</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
       rel="stylesheet"
     />
-    <meta name="description" content="" />
-    <link rel="stylesheet" href="./assets/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link rel="stylesheet" href="./assets/style.css" />
     <script src="main.js" defer></script>
   </head>
   <body>
-    <div class="maincontent">
-      <header>
-        <div class="headband">
-          <div class="band shown_if_logged">
-            <i class="fa-solid fa-pen-to-square" style="color: #ffffff"></i>
-            <p>Mode édition</p>
-          </div>
-          <div class="logonav">
-            <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-            <nav>
-              <ul>
-                <li><a href="#">projets</a></li>
-                <li><a href="#">contact</a></li>
-                <li class="hidden_if_logged"><a href="login.html">login</a></li>
-                <li class="shown_if_logged" id="logoutbutton">
-                  <a href="#">logout</a>
-                </li>
-                <li>
-                  <img
-                    src="./assets/icons/instagram.png"
-                    alt="Instagram"
-                    id="logoinstagram"
-                  />
-                </li>
-              </ul>
-            </nav>
-          </div>
+    <header>
+      <div class="headband">
+        <div class="band shown_if_logged">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <p>Mode édition</p>
         </div>
-      </header>
-      <main>
-        <section id="introduction">
-          <figure>
-            <img src="./assets/images/sophie-bluel.png" alt="" />
-          </figure>
-          <article>
-            <h2>Designer d'espace</h2>
-            <p>
-              Je raconte votre histoire, je valorise vos idées. Je vous
-              accompagne de la conception à la livraison finale du chantier.
-            </p>
-            <p>
-              Chaque projet sera étudié en commun, de façon à mettre en valeur
-              les volumes, les matières et les couleurs dans le respect de
-              l’esprit des lieux et le choix adapté des matériaux. Le suivi du
-              chantier sera assuré dans le souci du détail, le respect du
-              planning et du budget.
-            </p>
-            <p>
-              En cas de besoin, une équipe pluridisciplinaire peut-être
-              constituée : architecte DPLG, décorateur(trice)
-            </p>
-          </article>
-        </section>
-        <section id="portfolio">
-          <div class="projecttilte">
-            <h2>Mes Projets</h2>
-            <div class="modifier shown_if_logged_flex">
-              <i class="fa-regular fa-pen-to-square" style="color: #000000"></i>
-              <a href="#modal" class="js-modal">modifier</a>
-            </div>
-          </div>
-          <div class="filters">
-            <ul class="filterslist">
+        <div class="logonav">
+          <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+          <nav>
+            <ul>
+              <li><a href="#">Projets</a></li>
+              <li><a href="#">Contact</a></li>
+              <li class="hidden_if_logged"><a href="login.html">Login</a></li>
+              <li class="shown_if_logged" id="logoutbutton">
+                <a href="#">Logout</a>
+              </li>
               <li>
-                <button id="butontous" class="hidden_if_logged">Tous</button>
+                <img
+                  src="./assets/icons/instagram.png"
+                  alt="Instagram"
+                  id="logoinstagram"
+                />
               </li>
             </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="introduction">
+        <figure>
+          <img src="./assets/images/sophie-bluel.png" alt="Sophie Bluel" />
+        </figure>
+        <article>
+          <h2>Designer d'espace</h2>
+          <p>
+            Je raconte votre histoire, je valorise vos idées. Je vous accompagne
+            de la conception à la livraison finale du chantier.
+          </p>
+          <p>
+            Chaque projet sera étudié en commun, de façon à mettre en valeur les
+            volumes, les matières et les couleurs dans le respect de l’esprit
+            des lieux et le choix adapté des matériaux. Le suivi du chantier
+            sera assuré dans le souci du détail, le respect du planning et du
+            budget.
+          </p>
+          <p>
+            En cas de besoin, une équipe pluridisciplinaire peut être constituée
+            : architecte DPLG, décorateur(trice).
+          </p>
+        </article>
+      </section>
+
+      <section id="portfolio">
+        <div class="projecttilte">
+          <h2>Mes Projets</h2>
+          <div class="modifier shown_if_logged_flex">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <a href="#modal" class="js-modal">Modifier</a>
           </div>
-          <div class="gallery" id="img-gallery"></div>
-        </section>
-        <section id="contact">
-          <h2>Contact</h2>
-          <p>Vous avez un projet ? Discutons-en !</p>
-          <form action="#" method="post">
-            <label for="name">Nom</label>
-            <input type="text" name="name" id="name" />
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" />
-            <label for="message">Message</label>
-            <textarea
-              name="message"
-              id="message"
-              cols="30"
-              rows="10"
-            ></textarea>
-            <input type="submit" value="Envoyer" />
-          </form>
-        </section>
-        <aside id="modal" class="modal" style="display: none">
-          <div class="modal1-wrapper js-modal-stop">
-            <div class="modal-buttons">
-                <button class="modal2 modal3" id="modal-returnbutton">
-                  <i
-                    class="fa-solid fa-arrow-left fa-xl"
-                    style="color: #000000"
-                  ></i>
-                </button>
-              <button class="js-modal-close" id="modal-close-button">
-                <i class="fa-solid fa-xmark fa-xl" style="color: #000000"></i>
-              </button>
-            </div>
+        </div>
+        <div class="filters">
+          <ul class="filterslist">
+            <li>
+              <button id="butontous" class="hidden_if_logged">Tous</button>
+            </li>
+          </ul>
+        </div>
+        <div class="gallery" id="img-gallery"></div>
+      </section>
 
-            <h3 class="modal1">Galerie photo</h3>
-            <h3 class="modal2">Ajout photo</h3>
-            <div class="modal-gallery modal1" id="modal-photo"></div>
-            <div class="modal2" id="modal-add-picture">
-              <div id="modal-container-add-pic">
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>Vous avez un projet ? Discutons-en !</p>
+        <form action="#" method="post">
+          <label for="name">Nom</label>
+          <input type="text" name="name" id="name" required />
 
-                <i class="fa-regular fa-image" id="modal-add-picture-icon" style="color: #B8C4CC"></i>
-                <button>
-                  <input type="file" accept="image/jpeg, image/png" id="modal-fileinput" enctype="multipart/form-data"/>                  <p>+ Ajouter photo</p>
-                </button>
-                <p>jpg, png : 4mo max</p>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" required />
 
-              </div>
-              <form action="#" method="post" id="modal-form">
-                <p>Titre</p>
-                <input name="Titre" id="photoTitle"></input>
-                <p>Catégorie</p>
-                <div id="modal-select"></div>
-              </form>
-            </div>
-            <div id="modal-bottom">
-              <button class="modal-sendbutton modal1" id="buttontomodal2">
-                Ajouter une photo
-              </button>
-              <button class="modal-sendbutton modal2" id="modal-sendbutton2">Valider</button>
-            </div>
+          <label for="message">Message</label>
+          <textarea
+            name="message"
+            id="message"
+            cols="30"
+            rows="10"
+            required
+          ></textarea>
+
+          <input type="submit" value="Envoyer" />
+        </form>
+      </section>
+
+      <aside id="modal" class="modal" style="display: none">
+        <div class="modal1-wrapper js-modal-stop">
+          <div class="modal-buttons">
+            <button class="modal2 modal3" id="modal-returnbutton">
+              <i class="fa-solid fa-arrow-left fa-xl"></i>
+            </button>
+            <button class="js-modal-close" id="modal-close-button">
+              <i class="fa-solid fa-xmark fa-xl"></i>
+            </button>
           </div>
-        </aside>
-      </main>
-    </div>
+          <h3 class="modal1">Galerie photo</h3>
+          <h3 class="modal2">Ajout photo</h3>
+          <div class="modal-gallery modal1" id="modal-photo"></div>
+          <div class="modal2" id="modal-add-picture">
+            <div id="modal-container-add-pic">
+              <i class="fa-regular fa-image" id="modal-add-picture-icon"></i>
+              <button>
+                <div>
+                  <input
+                    type="file"
+                    accept="image/jpeg, image/png"
+                    id="modal-fileinput"
+                  />
+                </div>
+                <div>
+                  <p>+ Ajouter photo</p>
+                </div>
+              </button>
+              <p>jpg, png : 4 Mo max</p>
+            </div>
+            <form action="#" method="post" id="modal-form">
+              <p>Titre</p>
+              <input name="Titre" id="photoTitle" />
+              <p>Catégorie</p>
+              <div id="modal-select"></div>
+            </form>
+          </div>
+          <div id="modal-bottom">
+            <button class="modal-sendbutton modal1" id="buttontomodal2">
+              Ajouter une photo
+            </button>
+            <button class="modal-sendbutton modal2" id="modal-sendbutton2">
+              Valider
+            </button>
+          </div>
+        </div>
+      </aside>
+    </main>
 
     <footer>
       <nav>
         <ul>
-          <li>Mentions Légales</li>
+          <li><a href="#">Mentions Légales</a></li>
         </ul>
       </nav>
     </footer>
