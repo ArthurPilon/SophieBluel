@@ -34,7 +34,7 @@ loginForm.addEventListener("submit", (e) => {
       console.log("Stored UserId:", storedUserId);
 
       if (result.token) {
-        window.location.href = "/index.html";
+        window.location.href = "index.html";
       } else {
         alert("Erreur dans l’identifiant ou le mot de passe");
         //response.status != 200;

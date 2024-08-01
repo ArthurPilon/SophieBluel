@@ -3,6 +3,7 @@ const storedToken = localStorage.getItem("token");
 let works = null;
 let modal = null;
 let filters = null;
+const MAX_FILE_SIZE = 4 * 1024 * 1024;
 
 console.log(18, document.body.classList);
 
@@ -229,7 +230,7 @@ document
 
 // ajouter photo
 
-document
+addPic = document
   .getElementById("modal-fileinput")
   .addEventListener("change", function (event) {
     const file = event.target.files[0];
@@ -240,6 +241,11 @@ document
       const validImageTypes = ["image/jpeg", "image/png"];
       if (!validImageTypes.includes(file.type)) {
         alert("Erreur : le fichier doit être une image (jpg, png)");
+        return;
+      }
+
+      if (file.size > MAX_FILE_SIZE) {
+        alert("Erreur : le fichier doit être inférieur à 4 Mo");
         return;
       }
 
@@ -258,13 +264,11 @@ const titleInput = document.getElementById("photoTitle");
 const sendButton = document.getElementById("modal-sendbutton2");
 let categorySelect = undefined;
 
-//création du select
-
+// Création du select
 async function CreateModalFilters() {
   let modalSelect = document.getElementById("modal-select");
   modalSelect.innerHTML = "";
 
-  // <select>
   const selectElem = document.createElement("select");
   selectElem.name = "Catégorie";
   selectElem.id = "modal-form-category";
@@ -272,13 +276,11 @@ async function CreateModalFilters() {
   categorySelect = selectElem;
   categorySelect.addEventListener("change", checkFormValidity);
 
-  // <option> vide
   const defaultOption = document.createElement("option");
   defaultOption.value = "";
   defaultOption.textContent = "";
   selectElem.appendChild(defaultOption);
 
-  // <option> pour chaque filtre
   filters.forEach((item) => {
     const createOption = document.createElement("option");
     createOption.value = item.id;
@@ -291,32 +293,19 @@ async function CreateModalFilters() {
 
 let sendButtonEnable = false;
 
-// vérifier si tous les champs sont remplis
+// Vérifier si tous les champs sont remplis
 function checkFormValidity() {
   const file = fileInput.files[0];
   const title = titleInput.value.trim();
   const category = categorySelect.value;
 
-  console.log("File:", file);
-  console.log("Title:", title);
-  console.log("Category:", category);
-
-  if (
-    file !== undefined &&
-    title !== undefined &&
-    title !== "" &&
-    category !== undefined &&
-    category !== ""
-  ) {
-    // sendButton.disabled = false;
+  if (file && title && category) {
     sendButton.classList.remove("modal-sendbutton");
     sendButton.classList.add("modal-form-category-go");
-    console.log("Button class:", sendButton.className);
     sendButtonEnable = true;
   } else {
-    // sendButton.disabled = true;
     sendButton.classList.remove("modal-form-category-go");
-    console.log("Button class:", sendButton.className);
+    sendButton.classList.add("modal-sendbutton");
     sendButtonEnable = false;
   }
 }
@@ -365,7 +354,6 @@ sendButton.addEventListener("click", function (event) {
       titleInput.value = "";
       categorySelect.value = "";
       checkFormValidity();
-      sendButton.classList.add("modal-sendbutton");
 
       // Restaurer le contenu initial de la section photo
       const preview = document.getElementById("modal-container-add-pic");
@@ -374,33 +362,47 @@ sendButton.addEventListener("click", function (event) {
       // Réattacher l'événement de changement pour permettre le réupload d'une photo
       document
         .getElementById("modal-fileinput")
-        .addEventListener("change", function (event) {
-          const file = event.target.files[0];
-          const preview = document.getElementById("modal-container-add-pic");
-          preview.innerHTML = "";
-
-          if (file) {
-            const validImageTypes = ["image/jpeg", "image/png"];
-            if (!validImageTypes.includes(file.type)) {
-              alert("Erreur : le fichier doit être une image (jpg, png)");
-              return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function (e) {
-              const img = document.createElement("img");
-              img.src = e.target.result;
-              preview.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-          }
-          checkFormValidity();
-        });
+        .addEventListener("change", handleFileChange);
     })
     .catch((error) => {
       console.error("Erreur lors de l'envoi des données à l'API:", error);
     });
-  fileInput.addEventListener("change", checkFormValidity);
-  titleInput.addEventListener("input", checkFormValidity);
-  categorySelect.addEventListener("change", checkFormValidity);
 });
+
+fileInput.addEventListener("change", checkFormValidity);
+titleInput.addEventListener("input", checkFormValidity);
+categorySelect.addEventListener("change", checkFormValidity);
+
+function handleFileChange(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById("modal-container-add-pic");
+  preview.innerHTML = "";
+
+  if (file) {
+    const validImageTypes = ["image/jpeg", "image/png"];
+    if (!validImageTypes.includes(file.type)) {
+      alert("Erreur : le fichier doit être une image (jpg, png)");
+      return;
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      alert("Erreur : le fichier doit être inférieur à 4 Mo");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  }
+  checkFormValidity();
+}
+
+document
+  .getElementById("modal-fileinput")
+  .addEventListener("change", handleFileChange);
+titleInput.addEventListener("input", checkFormValidity);
+categorySelect.addEventListener("change", checkFormValidity);
